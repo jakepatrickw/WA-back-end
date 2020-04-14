@@ -1,7 +1,8 @@
 FROM python:3.8
 
-WORKDIR /app/api
-COPY requirements.txt /app/api
+WORKDIR /usr/local/watergun-assassin-backend
+COPY requirements.txt .
+COPY watergun_assassin .
 RUN pip install -r requirements.txt
 
 EXPOSE 8000

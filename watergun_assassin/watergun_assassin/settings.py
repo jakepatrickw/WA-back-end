@@ -26,7 +26,7 @@ SECRET_KEY = '3bdse*kd&o2tfw6!spd3+f0p#^k_gkyd&%vr**fw4$1@y7%&%8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['django', 'localhost','127.0.0.1','192.168.99.100']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'authentication.apps.AuthenticationConfig'
 ]
 
 MIDDLEWARE = [

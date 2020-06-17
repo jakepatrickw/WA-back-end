@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import UserProfile
 from django.views.decorators.csrf import csrf_exempt
+from .models import UserProfile
 
 @csrf_exempt
 def user_profile(request):
@@ -14,5 +14,3 @@ def user_profile(request):
         return JsonResponse({'status':'ok'})
     except:
         return JsonResponse({'status_code':400,'status':'Bad Request'})
-
-

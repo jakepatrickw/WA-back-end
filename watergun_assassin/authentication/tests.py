@@ -1,7 +1,5 @@
 from django.test import TestCase
 from django.urls import reverse
-from datetime import datetime
-
 
 class UserCreationTest(TestCase):
     def test_valid_payload(self):
@@ -10,19 +8,18 @@ class UserCreationTest(TestCase):
         password = 'fakepassword'
         email = 'email@company.com'
         data = {'username':username, 'password':password, 'email':email}
-        response = self.client.post(url,data) 
-        self.assertEqual(response.status_code,200)
+        response = self.client.post(url, data) 
+        self.assertEqual(response.status_code, 200)
 
-    
     def test_only_email(self):
         url = reverse('create_user')
         email = 'email@company.com'
         data = {'username':'', 'password':'', 'email':email}
         try:
-            response = self.client.post(url,data)
+            response = self.client.post(url, data)
             print(response.json())
         except:
-            self.assertEqual(response.status_code,400)
+            self.assertEqual(response.status_code, 400)
 
     
     def test_no_email(self):

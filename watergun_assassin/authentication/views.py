@@ -1,4 +1,5 @@
 import logging 
+import json
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -15,4 +16,47 @@ def create_user(request):
         return JsonResponse({'status':'ok'})
     except Exception as error:
         logging.error(error)
+        return JsonResponse({'status_code':400, 'status':'Bad Request'})
+
+def read_user(request):
+    try:
+        username = request.GET['username']
+        logging.info(username)
+        user = User.objects.get(username = username)
+        logging.info(user) 
+        logging.info(user.email)
+        return JsonResponse({'status':'ok', 'username':username,'email':user.email})
+    except Exception as error:
+        logging.exception(error)
+        return JsonResponse({'status_code':400, 'status':'Bad Request'})
+
+@csrf_exempt
+def update_user_name(request):
+    try:
+        logging.info(request.body)
+        payload = json.loads(request.body)
+        old_username = payload['old_username']
+        new_username = payload['new_username']
+        logging.info(old_username)
+        logging.info(new_username)
+        user = User.objects.get(username = old_username)
+        user.username = new_username
+        user.save()
+        return JsonResponse({'status':'ok', 'username':new_username})
+    except Exception as error:
+        logging.exception(error)
+        return JsonResponse({'status_code':400, 'status':'Bad Request'})
+    
+@ csrf_exempt
+def delete_user(request):
+    try:
+        logging.info(request.body)
+        payload = json.loads(request.body)
+        username = payload['username']
+        logging.info(username)
+        user = User.objects.get(username = username)
+        user.delete()
+        return JsonResponse({'status':'ok'})
+    except Exception as error:
+        logging.exception(error)
         return JsonResponse({'status_code':400, 'status':'Bad Request'})

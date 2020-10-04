@@ -17,5 +17,3 @@ def user_image(request):
     except Exception as error:
         logging.error(error)
         return JsonResponse({'status_code':400, 'status':'bad request'})
-
-

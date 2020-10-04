@@ -25,7 +25,8 @@ def read_user(request):
         user = User.objects.get(username = username)
         logging.info(user) 
         logging.info(user.email)
-        return JsonResponse({'status':'ok', 'username':username,'email':user.email})
+        return JsonResponse({'status' : 'ok', 'username' : username,
+                            'email' : user.email, 'password' : user.password})
     except Exception as error:
         logging.exception(error)
         return JsonResponse({'status_code':400, 'status':'Bad Request'})
@@ -42,10 +43,10 @@ def update_user_name(request):
         user = User.objects.get(username = old_username)
         user.username = new_username
         user.save()
-        return JsonResponse({'status':'ok', 'username':new_username})
+        return JsonResponse({'status' : 'ok', 'username' : new_username})
     except Exception as error:
         logging.exception(error)
-        return JsonResponse({'status_code':400, 'status':'Bad Request'})
+        return JsonResponse({'status_code' : 400, 'status' : 'Bad Request'})
     
 @ csrf_exempt
 def delete_user(request):

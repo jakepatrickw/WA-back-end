@@ -47,7 +47,6 @@ class UserCreationTest(TestCase):
     def test_read_user(self):
         url = reverse('read_user')
         username = 'admin'
-        # ask will about how reponse should work in test 
         data = {'username' : username}
         response = self.client.get(url, data)
         print(response)
@@ -63,5 +62,10 @@ class UserCreationTest(TestCase):
         except:
             self.assertEqual(response.status_code, 400)
 
-    #def test_update_user_name(self):
-        
+    def test_update_username(self):
+        url = reverse('update_username')
+        old_username = 'admin'
+        new_username = 'BIGadmin'
+        data = {'old_username' : old_username, 'new_username' : new_username} 
+        response = self.client.get(url, data)
+        self.assertEqual(response.status_code, 200)       

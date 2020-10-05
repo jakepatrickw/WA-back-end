@@ -32,7 +32,7 @@ def read_user(request):
         return JsonResponse({'status_code':400, 'status':'Bad Request'})
 
 @csrf_exempt
-def update_user_name(request):
+def update_username(request):
     try:
         logging.info(request.body)
         payload = json.loads(request.body)
@@ -47,8 +47,8 @@ def update_user_name(request):
     except Exception as error:
         logging.exception(error)
         return JsonResponse({'status_code' : 400, 'status' : 'Bad Request'})
-    
-@ csrf_exempt
+
+@csrf_exempt
 def delete_user(request):
     try:
         logging.info(request.body)

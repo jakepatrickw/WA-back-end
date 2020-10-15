@@ -4,7 +4,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from rest_framework.decorators import api_view 
 
+@api_view(['POST'])
 @csrf_exempt
 def create_user(request):
     try:
@@ -18,6 +20,8 @@ def create_user(request):
         logging.error(error)
         return JsonResponse({'status_code':400, 'status':'Bad Request'})
 
+@api_view(['GET'])
+@csrf_exempt
 def read_user(request):
     try:
         username = request.GET['username']
@@ -31,6 +35,7 @@ def read_user(request):
         logging.exception(error)
         return JsonResponse({'status_code':400, 'status':'Bad Request'})
 
+@api_view(['POST'])
 @csrf_exempt
 def update_username(request):
     try:
@@ -48,6 +53,7 @@ def update_username(request):
         logging.exception(error)
         return JsonResponse({'status_code' : 400, 'status' : 'Bad Request'})
 
+@api_view(['DELETE'])
 @csrf_exempt
 def delete_user(request):
     try:

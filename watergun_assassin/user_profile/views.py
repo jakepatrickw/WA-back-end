@@ -4,21 +4,30 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework import generics
+from rest_framework.decorators import api_view
+
 from .models import UserProfile
 
+class user_profile_list(generics.ListAPIView):
+    queryset = UserProfile.objects.all()
+
+@api_view(['POST'])
 @csrf_exempt
 def user_profile(request):
     try:
         personal_info = UserProfile(
-                                    biography = request.POST['biography'],
-                                    catch_phrase = request.POST['catch_phrase'],
-                                    user_id = request.POST['user_id']
-                                    )
+                    biography = User.objects.get('biography'),
+                    catch_phrase = User.objects.get('catch_phrase'),
+                    user_id = User.objects.get('user_id')
+                    )
         personal_info.save()
         return JsonResponse({'status':'ok'})
     except Exception as error:
         logging.error(error)
 
+@api_view(['POST'])
 @csrf_exempt
 def update_user_biography(request):
     try:

@@ -4,10 +4,10 @@ import logging
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserImage
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 
 @api_view(['POST'])
-@csrf_exempt
+@permission_classes(['AllowAny'])
 def user_image(request):
     try:
         user_id = request.POST['user_id']

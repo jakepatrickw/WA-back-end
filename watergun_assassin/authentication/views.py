@@ -4,9 +4,10 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from rest_framework.decorators import api_view 
+from rest_framework.decorators import api_view, permission_classes
 
 @api_view(['POST'])
+@permission_classes(['AllowAny'])
 @csrf_exempt
 def create_user(request):
     try:
@@ -21,7 +22,7 @@ def create_user(request):
         return JsonResponse({'status_code':400, 'status':'Bad Request'})
 
 @api_view(['GET'])
-@csrf_exempt
+@permission_classes(['AllowAny'])
 def read_user(request):
     try:
         username = request.GET['username']
@@ -36,7 +37,7 @@ def read_user(request):
         return JsonResponse({'status_code':400, 'status':'Bad Request'})
 
 @api_view(['POST'])
-@csrf_exempt
+@permission_classes(['AllowAny'])
 def update_username(request):
     try:
         logging.info(request.body)
@@ -54,7 +55,7 @@ def update_username(request):
         return JsonResponse({'status_code' : 400, 'status' : 'Bad Request'})
 
 @api_view(['DELETE'])
-@csrf_exempt
+@permission_classes(['AllowAny'])
 def delete_user(request):
     try:
         logging.info(request.body)

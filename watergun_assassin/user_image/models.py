@@ -13,4 +13,3 @@ def user_directory_path(instance, filename):
 class UserImage(models.Model):
     picture = models.FileField(upload_to = user_directory_path)
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-

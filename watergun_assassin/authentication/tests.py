@@ -68,4 +68,4 @@ class UserCreationTest(TestCase):
         new_username = 'BIGadmin'
         data = {'old_username' : old_username, 'new_username' : new_username} 
         response = self.client.get(url, data)
-        self.assertEqual(response.status_code, 200)       
+        self.assertEqual(response.status_code, 200)    

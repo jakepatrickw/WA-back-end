@@ -32,26 +32,18 @@ class UserLookup(RetrieveAPIView):
     serializer_class = authentication_serializer
     lookup_field = ['id']
 
+
+#does not work :(
 class DestroyUser(DestroyAPIView):
 
     permission_classes = [AllowAny] #this wil need updating. cant let anyone destroy?
     serializer_class = authentication_serializer
     queryset = User.objects.all()
+    lookup_field = ['id']
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)    
  
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_user_by_id(request):
-    if request.method == 'GET':
-        user_id = request.GET['user_id']
-        logging.info(user_id)
-        user = User.objects.get(id = user_id)
-        serializer = authentication_serializer(user)
-        return JsonResponse(serializer.data, safe=False)
 
 # @api_view(['POST'])
 # @permission_classes(['AllowAny'])

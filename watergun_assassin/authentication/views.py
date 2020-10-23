@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny
 from .serializer import authentication_serializer
 
@@ -31,19 +31,19 @@ class UserLookup(RetrieveAPIView):
     permission_classes = [AllowAny]
     serializer_class = authentication_serializer
     lookup_field = ['id']
-    
+
+
+#does not work :(
+class DestroyUser(DestroyAPIView):
+
+    permission_classes = [AllowAny] #this wil need updating. cant let anyone destroy?
+    serializer_class = authentication_serializer
+    queryset = User.objects.all()
+    lookup_field = ['id']
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)    
  
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_user_by_id(request):
-    if request.method == 'GET':
-        user_id = request.GET['user_id']
-        logging.info(user_id)
-        user = User.objects.get(id = user_id)
-        serializer = authentication_serializer(user)
-        return JsonResponse(serializer.data, safe=False)
 
 # @api_view(['POST'])
 # @permission_classes(['AllowAny'])

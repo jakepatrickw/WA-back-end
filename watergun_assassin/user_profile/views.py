@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework import permissions
 from rest_framework import viewsets
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView
 from .serializer import user_profile_serializer
 from .models import UserProfile
 
@@ -33,6 +33,16 @@ class UserProfileLookup(RetrieveAPIView):
     serializer_class = user_profile_serializer
     lookup_field = ['user_id']
         
+
+class UpdateBio(UpdateAPIView):
+
+    permission_classes = [AllowAny]
+    serializer_class = user_profile_serializer
+
+    #def put(self, request, *args, **kwargs):
+
+
+
 
 # @api_view(['POST'])
 # @permission_classes(['AllowAny'])

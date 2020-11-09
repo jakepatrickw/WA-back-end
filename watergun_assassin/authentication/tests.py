@@ -4,7 +4,7 @@ from django.urls import reverse
 class UserCreationTest(TestCase):
     
     def test_valid_payload(self):
-        url = reverse('create_user')
+        url = reverse('CreateUser')
         username = 'admin'
         password = 'fakepassword'
         email = 'email@company.com'
@@ -13,7 +13,7 @@ class UserCreationTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_only_email(self):
-        url = reverse('create_user')
+        url = reverse('CreateUser')
         email = 'email@company'
         data = {'username' : '', 'password' : '', 'email' : email}
         try:
@@ -23,7 +23,7 @@ class UserCreationTest(TestCase):
             self.assertEqual(response.status_code, 400)
 
     def test_no_email(self):
-        url = reverse('create_user')
+        url = reverse('CreateUser')
         username = 'newname'
         password = 'fakepassword'
         data = {'username' : username, 'password' : password}
@@ -34,7 +34,7 @@ class UserCreationTest(TestCase):
             self.assertEqual(response.status_code, 400)
         
     def test_no_password(self):
-        url = reverse('create_user')
+        url = reverse('CreateUser')
         username = 'newname'
         email = 'email@company.com'
         data = {'username':username, 'email':email}
@@ -44,28 +44,21 @@ class UserCreationTest(TestCase):
         except:
             self.assertEqual(response.status_code, 400)
     
-    def test_read_user(self):
-        url = reverse('read_user')
-        username = 'admin'
-        data = {'username' : username}
-        response = self.client.get(url, data)
+    def test_list_users(self):
+        url = reverse('ListAllUser')
+        response = self.client.get(url)
         print(response)
         self.assertEqual(response.status_code, 200)
-        
-    def test_user_read_no_data(self):
-        url = reverse('read_user')
-        username = ''
-        data = {'username': username}
-        try:
-            response = self.client.get(url, data)
-            print(response)
-        except:
-            self.assertEqual(response.status_code, 400)
+
+    def test_read_single_user(self):
+        url = reverse('UserLookup', kwargs={'id':1})
+        response = self.client.get(url)
+        print(response)
+        self.assertEqual(response.status_code, 200)    
 
     def test_update_username(self):
-        url = reverse('update_username')
-        old_username = 'admin'
+        url = reverse('UpdateUser', kwargs={'id':1})
         new_username = 'BIGadmin'
-        data = {'old_username' : old_username, 'new_username' : new_username} 
-        response = self.client.get(url, data)
+        data = {'username' : new_username}
+        response = self.client.put(url, data)
         self.assertEqual(response.status_code, 200)    

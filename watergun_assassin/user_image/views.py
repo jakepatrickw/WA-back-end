@@ -1,10 +1,8 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-import logging
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
-from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView, RetrieveAPIView
-from rest_framework.permissions import AllowAny
+#from django_filters.rest_framework import DjangoFilterBackend
+#from rest_framework.filters import SearchFilter
+from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, RetrieveAPIView, UpdateAPIView
 from .models import UserImage
 from .serializer import ImageSerializer, ImageUpdateSerializer
 
@@ -22,6 +20,9 @@ class ListImage(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = ImageSerializer
     queryset = UserImage.objects.all()
+    #filter_backends = [DjangoFilterBackend, SearchFilter]
+    #filter_fields = ['user_id']
+    
 
 class LookupImage(RetrieveAPIView):
 

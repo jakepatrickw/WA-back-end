@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    #'django_filters',
     'authentication.apps.AuthenticationConfig',
+    'game_logic.apps.GameLogicConfig',
     'user_profile.apps.UserProfileConfig',
-    'user_image.apps.UserImageConfig'
+    'user_image.apps.UserImageConfig',
     ]
 
 MIDDLEWARE = [

@@ -1,16 +1,21 @@
 from django.test import TestCase
 from django.urls import reverse
+from rest_framework.test import APIRequestFactory
 
 class UserCreationTest(TestCase):
     
     def test_valid_payload(self):
+        # factory = APIRequestFactory()
+        # request = factory.post('create/', {'username':'admin', 'password':'fakepass',
+        #                         'email':'email@company.com'}, format='json')
+        # self.assertEqual(request.status_code, 201)
         url = reverse('CreateUser')
         username = 'admin'
         password = 'fakepassword'
         email = 'email@company.com'
         data = {'username' : username, 'password' : password, 'email' : email}
         response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
 
     def test_only_email(self):
         url = reverse('CreateUser')
@@ -57,7 +62,7 @@ class UserCreationTest(TestCase):
         self.assertEqual(response.status_code, 200)    
 
     def test_update_username(self):
-        url = reverse('UpdateUser', kwargs={'id':1})
+        url = reverse('UpdateUser', kwargs={'id': 1})
         new_username = 'BIGadmin'
         data = {'username' : new_username}
         response = self.client.put(url, data)

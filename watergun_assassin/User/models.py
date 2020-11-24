@@ -12,4 +12,9 @@ def user_directory_path(instance, filename):
 
 class UserImage(models.Model):
     picture = models.FileField(upload_to = user_directory_path)
-    user_id = models.ForeignKey(User, on_delete = models.CASCADE, unique=True)
+    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+
+class UserProfile(models.Model):
+    biography = models.CharField(max_length = 300)
+    catch_phrase = models.CharField(max_length = 30)
+    user_id = models.OneToOneField(User, on_delete = models.CASCADE)

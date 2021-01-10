@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path('user/lookup/<int:id>', views.UserLookup.as_view(), name = 'UserLookup'),
     path('user/read/', views.ReadUser.as_view(), name = 'ReadUser'),

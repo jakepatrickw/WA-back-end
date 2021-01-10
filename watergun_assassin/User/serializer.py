@@ -13,7 +13,7 @@ class AuthenticationUpdateSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'id', 'email']
     username = serializers.CharField(required=False)
-    email = serializers.CharField(required=False)
+    email = serializers.EmailField(required=False)
 
 
 class ImageSerializer(serializers.ModelSerializer):

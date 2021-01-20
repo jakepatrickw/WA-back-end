@@ -1,4 +1,4 @@
-from .models import Game, Player
+from .models import Game, Player, Round
 from rest_framework import serializers
 
 
@@ -28,9 +28,9 @@ class PlayerUpdateSerializer(serializers.ModelSerializer):
     is_admin = serializers.BooleanField(required=False)
 
 
-# class RoundsSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Rounds
-#         fields = ['assassin', 'target', 'game', 'rounds', 'assassinated']
+class RoundSerializer(serializers.ModelSerializer):
+   class Meta:
+        model = Round
+        fields = ['round_number', 'assassinated', 'game']
 
     

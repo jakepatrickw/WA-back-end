@@ -9,5 +9,7 @@ urlpatterns = [
     path('player/lookup/<int:player>', views.ReadPlayer.as_view(), name='ReadPlayer'),
     path('player/create/', views.CreatePlayer.as_view(), name='CreatePlayer'),
     path('player/destroy/', views.DestroyPlayer.as_view(), name='DestroyPlayer'),
-    path('player/update/', views.UpdatePlayer.as_view(), name='UpdatePlayer')
+    path('player/update/', views.UpdatePlayer.as_view(), name='UpdatePlayer'),
+    path('round/read/', views.ReadRound.as_view(), name='ReadRound'),
+    path('round/create/', views.CreateRound.as_view(), name='CreateRound')
 ]

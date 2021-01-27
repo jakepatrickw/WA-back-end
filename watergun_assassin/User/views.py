@@ -1,6 +1,5 @@
 import logging 
 from django.contrib.auth.models import User
-from rest_framework.decorators import api_view, permission_classes
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
@@ -8,8 +7,8 @@ from rest_framework.permissions import AllowAny
 from .serializer import AuthenticationSerializer, AuthenticationUpdateSerializer, ImageSerializer, ImageUpdateSerializer, UserProfileSerializer, UserUpdateProfileSerializer
 from .models import UserImage, UserProfile
 
-class CreateUser(CreateAPIView):
 
+class CreateUser(CreateAPIView):
     permission_classes = [AllowAny]
     serializer_class = AuthenticationSerializer
 
@@ -18,7 +17,6 @@ class CreateUser(CreateAPIView):
 
 
 class ReadUser(ListAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = AuthenticationSerializer
     queryset = User.objects.all()
@@ -28,7 +26,6 @@ class ReadUser(ListAPIView):
 
 
 class UserLookup(RetrieveAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = AuthenticationSerializer
     queryset = User.objects.all()
@@ -36,7 +33,6 @@ class UserLookup(RetrieveAPIView):
 
 
 class DestroyUser(DestroyAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = AuthenticationSerializer
     queryset = User.objects.all()
@@ -44,7 +40,6 @@ class DestroyUser(DestroyAPIView):
 
 
 class UpdateUser(UpdateAPIView):
-    
     permission_classes = [AllowAny]
     serializer_class = AuthenticationUpdateSerializer
     queryset = User.objects.all()
@@ -52,7 +47,6 @@ class UpdateUser(UpdateAPIView):
 
 
 class UploadImage(CreateAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = ImageSerializer
     
@@ -61,7 +55,6 @@ class UploadImage(CreateAPIView):
 
 
 class ListImage(ListAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = ImageSerializer
     queryset = UserImage.objects.all()
@@ -70,7 +63,6 @@ class ListImage(ListAPIView):
     
 
 class LookupImage(RetrieveAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = ImageSerializer
     queryset = UserImage.objects.all()
@@ -78,7 +70,6 @@ class LookupImage(RetrieveAPIView):
 
 
 class UpdateImage(UpdateAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = ImageUpdateSerializer
     queryset = UserImage.objects.all()
@@ -86,7 +77,6 @@ class UpdateImage(UpdateAPIView):
 
 
 class DestroyImage(DestroyAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = ImageSerializer
     queryset = UserImage.objects.all()
@@ -94,7 +84,6 @@ class DestroyImage(DestroyAPIView):
 
 
 class UserProfileList(ListAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = UserProfileSerializer
     queryset = UserProfile.objects.all()
@@ -104,7 +93,6 @@ class UserProfileList(ListAPIView):
 
 
 class UserProfileCreate(CreateAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = UserProfileSerializer
 
@@ -113,7 +101,6 @@ class UserProfileCreate(CreateAPIView):
 
 
 class UserProfileLookup(RetrieveAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = UserProfileSerializer
     queryset = UserProfile.objects.all()
@@ -121,7 +108,6 @@ class UserProfileLookup(RetrieveAPIView):
     
 
 class UpdateUserInfo(UpdateAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = UserUpdateProfileSerializer
     queryset = UserProfile.objects.all()
@@ -129,7 +115,6 @@ class UpdateUserInfo(UpdateAPIView):
 
 
 class DestroyUserInfo(DestroyAPIView):
-
     permission_classes = [AllowAny]
     serializer_class = UserProfileSerializer
     queryset = UserProfile.objects.all()

@@ -2,10 +2,33 @@ import logging
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, \
+                                    DestroyAPIView, UpdateAPIView, RetrieveDestroyAPIView, \
+                                    ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
-from .serializer import AuthenticationSerializer, AuthenticationUpdateSerializer, ImageSerializer, ImageUpdateSerializer, UserProfileSerializer, UserUpdateProfileSerializer
+from .serializer import AuthenticationSerializer, AuthenticationUpdateSerializer, \
+                        ImageSerializer, ImageUpdateSerializer, UserProfileSerializer, \
+                        UserUpdateProfileSerializer
 from .models import UserImage, UserProfile
+
+
+class ReadUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = AuthenticationUpdateSerializer
+    queryset = User.objects.all()
+    lookup_field = 'id'
+
+
+class ListCreateUser(ListCreateAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = AuthenticationSerializer
+    queryset = User.objects.all()
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filter_fields = ['id']
+    search_fields = ['username', 'email']
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class CreateUser(CreateAPIView):
@@ -16,7 +39,7 @@ class CreateUser(CreateAPIView):
         return self.create(request, *args, **kwargs)
 
 
-class ReadUser(ListAPIView):
+class ListUser(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = AuthenticationSerializer
     queryset = User.objects.all()
@@ -25,23 +48,16 @@ class ReadUser(ListAPIView):
     search_fields = ['username', 'email']
 
 
-class UserLookup(RetrieveAPIView):
-    permission_classes = [AllowAny]
-    serializer_class = AuthenticationSerializer
-    queryset = User.objects.all()
-    lookup_field = 'id'
-
-
-class DestroyUser(DestroyAPIView):
-    permission_classes = [AllowAny]
-    serializer_class = AuthenticationSerializer
-    queryset = User.objects.all()
-    lookup_field = 'id'
-
-
 class UpdateUser(UpdateAPIView):
     permission_classes = [AllowAny]
     serializer_class = AuthenticationUpdateSerializer
+    queryset = User.objects.all()
+    lookup_field = 'id'
+
+
+class ReadDestroyUser(RetrieveDestroyAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = AuthenticationSerializer
     queryset = User.objects.all()
     lookup_field = 'id'
 

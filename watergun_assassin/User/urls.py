@@ -3,11 +3,12 @@ from . import views
 
 
 urlpatterns = [
-    path('user/lookup/<int:id>', views.UserLookup.as_view(), name = 'UserLookup'),
-    path('user/read/', views.ReadUser.as_view(), name = 'ReadUser'),
+    path('user/list/', views.ListUser.as_view(), name = 'ListUser'),
     path('user/create/', views.CreateUser.as_view(), name = 'CreateUser'),
     path('user/update/<int:id>', views.UpdateUser.as_view(), name = 'UpdateUser'),
-    path('user/delete/<int:id>', views.DestroyUser.as_view(), name = 'DestroyUser'),
+    path('user/read.update.destroy/<int:id>', views.ReadUpdateDestroy.as_view(), name='ReadUpdateDestroy'),
+    path('user/list.create/', views.ListCreateAPIView.as_view(), name='ListCreateUser'),
+    path('user/get.delete/<int:id>', views.ReadDestroyUser.as_view(), name='ReadDestroyUser'),
     path('image/create/', views.UploadImage.as_view(), name = 'UploadImage'),
     path('image/list/', views.ListImage.as_view(), name = 'ListImage'),
     path('image/update/<int:user_id>', views.UpdateImage.as_view(), name = 'UpdateImage'),

@@ -12,13 +12,13 @@ class Player(models.Model):
     is_admin = models.BooleanField(default=False)
 
 
-class Round(models.Model):
-    game = models.OneToOneField(Game, on_delete=models.CASCADE)
-    round_number = models.IntegerField(default=0)
-    assassinated = models.OneToOneField(Player, on_delete=models.CASCADE, null=True)
+# class Round(models.Model):
+#     game = models.OneToOneField(Game, on_delete=models.CASCADE)
+#     round_number = models.IntegerField(default=0)
+#     assassinated = models.OneToOneField(Player, on_delete=models.CASCADE, null=True)
 
 
-class RoundPairing(models.Model):
-    round_number = models.OneToOneField(Round, on_delete=models.CASCADE, null=False)
-    assassin = models.OneToOneField(Player, null=True, on_delete=models.CASCADE, related_name='player')
-    target = models.OneToOneField(Player, null=True, on_delete=models.CASCADE, related_name='target')
+# class RoundPairing(models.Model):
+#     round_number = models.OneToOneField(Round, on_delete=models.CASCADE, null=False)
+#     assassin = models.OneToOneField(Player, null=True, on_delete=models.CASCADE, related_name='player')
+#     target = models.OneToOneField(Player, null=True, on_delete=models.CASCADE, related_name='target')

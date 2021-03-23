@@ -25,6 +25,11 @@ class ReadGame(ListAPIView):
     filter_fields = ['id']
     search_fields = ['admin']
 
+class ListGame(ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = GameSerializer
+    queryset = Game.objects.all()
+
 
 class DestroyGame(DestroyAPIView):
     permission_classes = [AllowAny]
@@ -55,6 +60,12 @@ class ReadPlayer(ListAPIView):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filter_fields = ['player']
     search_fields = ['game']
+
+
+class ListPlayer(ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = PlayerSerializer
+    queryset = Player.objects.all()
 
 
 class DestroyPlayer(DestroyAPIView):
